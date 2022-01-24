@@ -1,5 +1,9 @@
 # ESP8266-co2monitor
 
+<a href="https://github.com/timo619/co2monitor/blob/master/doc/images/co2sensor.jpg?raw=true">
+    <img alt="Pins" src="https://github.com/timo619/co2monitor/blob/master/doc/images/co2sensor.jpg?raw=true" width="500">
+</a>
+
 ## description
 
 Interface an TFA Dostmann CO2 Monitor (Model: AirCO2ntrol Coach) with ESP8266 (in my example ESP-12) to connect it to the "Internet of Things", fully integrated into the case. It publishes the CO2 measurement and temperature to a configured MQTT topic.
