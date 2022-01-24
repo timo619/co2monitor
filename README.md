@@ -27,8 +27,8 @@ Add pins to J-SPI: G, DATA, CLK, +3V (= Ground / DATA / CLOCK / 3.3 V):
 
 Prepare wiring of our ESP8266 as seen here (with RST to GPIO16, if you are using the ESP.deepSleep function):
 <br>
-<a href="https://github.com/timo619/co2monitor/blob/master/doc/images/wiring.jpg?raw=true">
-    <img alt="Wemos Wiring" src="https://github.com/timo619/co2monitor/blob/master/doc/images/wiring.jpg?raw=true">
+<a href="https://github.com/timo619/co2monitor/blob/master/doc/images/wiring.png?raw=true">
+    <img alt="Wiring" src="https://github.com/timo619/co2monitor/blob/master/doc/images/wiring.png?raw=true">
 </a>
 
 Insert an isolate your ESP8266 to your co2 monitor:
