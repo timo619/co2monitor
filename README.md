@@ -2,45 +2,47 @@
 
 ## description
 
-Interface an TFA Dostmann CO2 Monitor with ESP8266 (in our example a WEMOS D1 Mini) to connect it to the "Internet of Things". It publishes the CO2 measurement and temperature to a configured MQTT topic.
+Interface an TFA Dostmann CO2 Monitor (Model: AirCO2ntrol Coach) with ESP8266 (in my example ESP-12) to connect it to the "Internet of Things", fully integrated into the case. It publishes the CO2 measurement and temperature to a configured MQTT topic.
 
-It also implements [Home Assistant Auto Discovery](https://www.home-assistant.io/docs/mqtt/discovery/).
+Not working:
+- [Home Assistant Auto Discovery](https://www.home-assistant.io/docs/mqtt/discovery/).
+
+Thanks to "schinken" for the main part of the work:
+https://github.com/schinken/esp8266-co2monitor
+
 
 ## compiling
 
-* Rename settings.h.example to settings.h
+* configure settings.h
 * Open up your arduino IDE
-* Edit the settings.h to match your setup
-* Upload the compiled result to your Wemos D1 Mini
+* Upload the compiled result to your ESP6288
 
 ## wiring
 
-Add a pin header to the existing PCB. Left to right: GND, Clock, Data, 5V:
+Add pins to J-SPI: G, DATA, CLK, +3V (= Ground / DATA / CLOCK / 3.3 V):
 <br>
-<a href="https://github.com/b4ckspace/esp8266-co2monitor/blob/master/doc/images/pinheader.jpg?raw=true">
-    <img alt="PIN Header" src="https://github.com/b4ckspace/esp8266-co2monitor/blob/master/doc/images/pinheader-thumb.jpg?raw=true">
+<a href="https://github.com/timo619/co2monitor/blob/master/doc/images/pins.jpg?raw=true">
+    <img alt="Pins" src="https://github.com/timo619/co2monitor/blob/master/doc/images/pins.jpg?raw=true">
 </a>
 
-Wire up your Wemos with 4 wires, connected to 5V, G, D2 and D1:
+Prepare wiring of our ESP8266 as seen here (with RST to GPIO16, if you are using the ESP.deepSleep function):
 <br>
-<a href="https://github.com/b4ckspace/esp8266-co2monitor/blob/master/doc/images/wemos-wiring.jpg?raw=true">
-    <img alt="Wemos Wiring" src="https://github.com/b4ckspace/esp8266-co2monitor/blob/master/doc/images/wemos-wiring-thumb.jpg?raw=true">
+<a href="https://github.com/timo619/co2monitor/blob/master/doc/images/wiring.jpg?raw=true">
+    <img alt="Wemos Wiring" src="https://github.com/timo619/co2monitor/blob/master/doc/images/wiring.jpg?raw=true">
 </a>
 
-Now connect your Wemos D1 mini to your co2 monitor:
+Insert an isolate your ESP8266 to your co2 monitor:
 <br>
-<a href="https://github.com/b4ckspace/esp8266-co2monitor/blob/master/doc/images/wiring.jpg?raw=true">
-    <img alt="Final Wiring" src="https://github.com/b4ckspace/esp8266-co2monitor/blob/master/doc/images/wiring-thumb.jpg?raw=true">
+<a href="https://github.com/timo619/co2monitor/blob/master/doc/images/esp12_inside.jpg?raw=true">
+    <img alt="Final Wiring" src="https://github.com/timo619/co2monitor/blob/master/doc/images/esp12_inside.jpg?raw=true">
 </a>
 
 ## using
-Since we're using [WiFiManager](https://github.com/tzapu/WiFiManager), after flashing, the EPS8266 will open up a WiFi Hotspot to configure Wireless credentials. Just connect to it using a wifi-capable device and you should be automatically redirected to the configuration page.
+Since we're using [WiFiManager](https://github.com/tzapu/WiFiManager), after flashing, the EPS8266 will open up a WiFi Hotspot to configure Wireless credentials. Just connect to it using a wifi-capable device and open 
+http://192.168.4.1 (no https)
 
 The ESP8266 will also default to AP mode if the configured wifi is unavailable.
 You might want to set a password for the AP mode in your settings.h
-
-If `USE_HA_AUTODISCOVERY` is set and mqtt is configured correctly,
-you should find a new device with CO2 + Temperature entities in your Home Assistant installations devices section.
 
 ## dependencies
 
@@ -48,4 +50,4 @@ you should find a new device with CO2 + Temperature entities in your Home Assist
 
 ## notes
 
-Don't use D4 and D3, because it causes power-on issues with wemos d1 mini: https://www.forward.com.au/pfod/ESP8266/GPIOpins/index.html
+Also works on ESP32 when some out-commented functions are enabled
